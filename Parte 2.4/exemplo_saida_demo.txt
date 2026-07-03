@@ -1,0 +1,180 @@
+==============================================================================
+ DEMONSTRAÇÃO AUTOMÁTICA - SISTEMA DE DIAGNÓSTICO MÉDICO BASEADO EM CASOS
+==============================================================================
+Base de conhecimento inicial: 20 casos, 8 doenças distintas: ['COVID-19', 'Dengue', 'Enxaqueca', 'Faringoamigdalite', 'Gastroenterite', 'Gripe (Influenza)', 'Resfriado Comum', 'Sinusite']
+
+------------------------------------------------------------------------------
+CONSULTA: Paciente adulto com suspeita de Dengue
+------------------------------------------------------------------------------
+Entrada do paciente -> sintomas: ['febre_alta', 'dor_atras_dos_olhos', 'dor_muscular', 'manchas_vermelhas_na_pele']
+                       idade_faixa: adulto | duracao_dias: 3
+
+[1] RETRIEVE - casos mais semelhantes recuperados:
+   1. Caso C07  (similaridade = 0.840)
+      Diagnóstico histórico: Dengue
+      Sintomas do caso     : febre_alta, dor_atras_dos_olhos, dor_muscular, manchas_vermelhas_na_pele, fadiga
+      Idade/Duração        : adulto / 3 dia(s)
+   2. Caso C08  (similaridade = 0.830)
+      Diagnóstico histórico: Dengue
+      Sintomas do caso     : febre_alta, dor_muscular, dor_atras_dos_olhos, nausea, manchas_vermelhas_na_pele
+      Idade/Duração        : adulto / 4 dia(s)
+   3. Caso C09  (similaridade = 0.490)
+      Diagnóstico histórico: Dengue
+      Sintomas do caso     : febre_alta, dor_muscular, nausea, vomito, manchas_vermelhas_na_pele
+      Idade/Duração        : idoso / 2 dia(s)
+
+[2] REUSE - diagnóstico proposto a partir dos casos recuperados:
+    Diagnóstico sugerido : Dengue
+    Tratamento sugerido  : Hidratação oral intensa, paracetamol (evitar AAS/AINEs) e monitoramento de sinais de alarme.
+    Confiança da sugestão: 100.0%   (votos: {'Dengue': 2.16})
+
+[3] REVISE - validação humana:
+    Sugestão CONFIRMADA pelo avaliador.
+    Diagnóstico final: Dengue
+    Tratamento final : Hidratação oral intensa, paracetamol (evitar AAS/AINEs) e monitoramento de sinais de alarme.
+
+[4] RETAIN - novo caso R-5fefdf98 adicionado e salvo na base (total agora: 21 casos).
+
+------------------------------------------------------------------------------
+CONSULTA: Paciente adulto com dor de cabeça pulsátil
+------------------------------------------------------------------------------
+Entrada do paciente -> sintomas: ['dor_de_cabeca_pulsatil', 'nausea', 'sensibilidade_a_luz']
+                       idade_faixa: adulto | duracao_dias: 1
+
+[1] RETRIEVE - casos mais semelhantes recuperados:
+   1. Caso C13  (similaridade = 0.800)
+      Diagnóstico histórico: Enxaqueca
+      Sintomas do caso     : dor_de_cabeca_pulsatil, nausea, sensibilidade_a_luz, sensibilidade_a_som
+      Idade/Duração        : adulto / 1 dia(s)
+   2. Caso C14  (similaridade = 0.800)
+      Diagnóstico histórico: Enxaqueca
+      Sintomas do caso     : dor_de_cabeca_pulsatil, nausea, sensibilidade_a_luz, vomito
+      Idade/Duração        : adulto / 1 dia(s)
+   3. Caso C15  (similaridade = 0.510)
+      Diagnóstico histórico: Enxaqueca
+      Sintomas do caso     : dor_de_cabeca_pulsatil, sensibilidade_a_som, sensibilidade_a_luz, fadiga
+      Idade/Duração        : adulto / 2 dia(s)
+
+[2] REUSE - diagnóstico proposto a partir dos casos recuperados:
+    Diagnóstico sugerido : Enxaqueca
+    Tratamento sugerido  : Repouso em ambiente escuro e silencioso, analgésico específico e hidratação.
+    Confiança da sugestão: 100.0%   (votos: {'Enxaqueca': 2.1100000000000003})
+
+[3] REVISE - validação humana:
+    Sugestão CONFIRMADA pelo avaliador.
+    Diagnóstico final: Enxaqueca
+    Tratamento final : Repouso em ambiente escuro e silencioso, analgésico específico e hidratação.
+
+[4] RETAIN - novo caso R-a9fb1ef1 adicionado e salvo na base (total agora: 22 casos).
+
+------------------------------------------------------------------------------
+CONSULTA: Paciente adulto com febre, tosse seca e fadiga (caso ambíguo)
+------------------------------------------------------------------------------
+Entrada do paciente -> sintomas: ['febre', 'tosse_seca', 'fadiga', 'dor_muscular']
+                       idade_faixa: adulto | duracao_dias: 2
+
+[1] RETRIEVE - casos mais semelhantes recuperados:
+   1. Caso C03  (similaridade = 0.830)
+      Diagnóstico histórico: Gripe (Influenza)
+      Sintomas do caso     : tosse_seca, dor_de_garganta, febre, dor_muscular, fadiga
+      Idade/Duração        : adulto / 3 dia(s)
+   2. Caso C01  (similaridade = 0.733)
+      Diagnóstico histórico: Gripe (Influenza)
+      Sintomas do caso     : febre, calafrios, dor_de_cabeca, dor_muscular, tosse_seca, fadiga
+      Idade/Duração        : adulto / 2 dia(s)
+   3. Caso C12  (similaridade = 0.730)
+      Diagnóstico histórico: COVID-19
+      Sintomas do caso     : febre, falta_de_ar, tosse_seca, fadiga, dor_muscular
+      Idade/Duração        : idoso / 3 dia(s)
+
+[2] REUSE - diagnóstico proposto a partir dos casos recuperados:
+    Diagnóstico sugerido : Gripe (Influenza)
+    Tratamento sugerido  : Repouso, hidratação, antitérmico e monitoramento de sintomas respiratórios.
+    Confiança da sugestão: 68.2%   (votos: {'Gripe (Influenza)': 1.5633333333333335, 'COVID-19': 0.7300000000000001})
+
+[3] REVISE - validação humana:
+    Sugestão CORRIGIDA pelo avaliador para: COVID-19
+    Diagnóstico final: COVID-19
+    Tratamento final : Isolamento, teste confirmatório e monitoramento de saturação de O2.
+
+[4] RETAIN - novo caso R-3e481292 adicionado e salvo na base (total agora: 23 casos).
+
+------------------------------------------------------------------------------
+CONSULTA: Criança com diarreia e vômito
+------------------------------------------------------------------------------
+Entrada do paciente -> sintomas: ['diarreia', 'vomito', 'dor_abdominal']
+                       idade_faixa: crianca | duracao_dias: 1
+
+[1] RETRIEVE - casos mais semelhantes recuperados:
+   1. Caso C17  (similaridade = 0.800)
+      Diagnóstico histórico: Gastroenterite
+      Sintomas do caso     : diarreia, dor_abdominal, vomito, mal_estar_leve
+      Idade/Duração        : crianca / 1 dia(s)
+   2. Caso C16  (similaridade = 0.570)
+      Diagnóstico histórico: Gastroenterite
+      Sintomas do caso     : diarreia, nausea, vomito, dor_abdominal, febre
+      Idade/Duração        : adulto / 2 dia(s)
+   3. Caso C14  (similaridade = 0.233)
+      Diagnóstico histórico: Enxaqueca
+      Sintomas do caso     : dor_de_cabeca_pulsatil, nausea, sensibilidade_a_luz, vomito
+      Idade/Duração        : adulto / 1 dia(s)
+
+[2] REUSE - diagnóstico proposto a partir dos casos recuperados:
+    Diagnóstico sugerido : Gastroenterite
+    Tratamento sugerido  : Soro de reidratação oral, dieta leve e observação de sinais de desidratação.
+    Confiança da sugestão: 85.4%   (votos: {'Gastroenterite': 1.37, 'Enxaqueca': 0.23333333333333334})
+
+[3] REVISE - validação humana:
+    Sugestão CONFIRMADA pelo avaliador.
+    Diagnóstico final: Gastroenterite
+    Tratamento final : Soro de reidratação oral, dieta leve e observação de sinais de desidratação.
+
+[4] RETAIN - novo caso R-b1770e18 adicionado e salvo na base (total agora: 24 casos).
+
+------------------------------------------------------------------------------
+CONSULTA: Paciente adulto com dor facial e congestão prolongada
+------------------------------------------------------------------------------
+Entrada do paciente -> sintomas: ['dor_facial', 'congestao_nasal', 'coriza_espessa']
+                       idade_faixa: adulto | duracao_dias: 6
+
+[1] RETRIEVE - casos mais semelhantes recuperados:
+   1. Caso C19  (similaridade = 0.800)
+      Diagnóstico histórico: Sinusite
+      Sintomas do caso     : dor_facial, congestao_nasal, tosse_leve, coriza_espessa
+      Idade/Duração        : adulto / 6 dia(s)
+   2. Caso C18  (similaridade = 0.670)
+      Diagnóstico histórico: Sinusite
+      Sintomas do caso     : congestao_nasal, dor_facial, dor_de_cabeca, coriza_espessa, febre_leve
+      Idade/Duração        : adulto / 5 dia(s)
+   3. Caso C06  (similaridade = 0.303)
+      Diagnóstico histórico: Resfriado Comum
+      Sintomas do caso     : espirros, congestao_nasal, tosse_leve, mal_estar_leve
+      Idade/Duração        : adulto / 3 dia(s)
+
+[2] REUSE - diagnóstico proposto a partir dos casos recuperados:
+    Diagnóstico sugerido : Sinusite
+    Tratamento sugerido  : Lavagem nasal com soro fisiológico, analgésico e acompanhamento clínico.
+    Confiança da sugestão: 82.9%   (votos: {'Sinusite': 1.47, 'Resfriado Comum': 0.30333333333333334})
+
+[3] REVISE - validação humana:
+    Sugestão CONFIRMADA pelo avaliador.
+    Diagnóstico final: Sinusite
+    Tratamento final : Lavagem nasal com soro fisiológico, analgésico e acompanhamento clínico.
+
+[4] RETAIN - novo caso R-dbcb4d91 adicionado e salvo na base (total agora: 25 casos).
+
+==============================================================================
+ RESUMO DAS CONSULTAS EXECUTADAS
+==============================================================================
+- Paciente adulto com suspeita de Dengue
+  caso mais próximo: C07 (sim=0.84) -> diagnóstico final: Dengue (confiança da sugestão original: 100.0%) -> retido como R-5fefdf98
+- Paciente adulto com dor de cabeça pulsátil
+  caso mais próximo: C13 (sim=0.80) -> diagnóstico final: Enxaqueca (confiança da sugestão original: 100.0%) -> retido como R-a9fb1ef1
+- Paciente adulto com febre, tosse seca e fadiga (caso ambíguo)
+  caso mais próximo: C03 (sim=0.83) -> diagnóstico final: COVID-19 (confiança da sugestão original: 68.2%) -> retido como R-3e481292
+- Criança com diarreia e vômito
+  caso mais próximo: C17 (sim=0.80) -> diagnóstico final: Gastroenterite (confiança da sugestão original: 85.4%) -> retido como R-b1770e18
+- Paciente adulto com dor facial e congestão prolongada
+  caso mais próximo: C19 (sim=0.80) -> diagnóstico final: Sinusite (confiança da sugestão original: 82.9%) -> retido como R-dbcb4d91
+
+Base final possui 25 casos (8 doenças distintas).
