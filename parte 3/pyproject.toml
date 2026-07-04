@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentia"
+version = "1.0.0"
+description = "Agente baseado em LLM com pesquisa na internet"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "ollama",
+    "ddgs",
+    "python-dotenv",
+    "rich",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

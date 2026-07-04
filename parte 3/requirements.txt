@@ -1,0 +1,5 @@
+ollama>=0.4
+ddgs>=6.0
+python-dotenv>=1.0
+rich>=13.0
+pytest>=8.0
